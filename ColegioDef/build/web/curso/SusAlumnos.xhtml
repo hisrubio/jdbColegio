@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Busqueda alumno por curso"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+        <h:form>
+            <h:selectOneMenu id="uncurso" value="#{alumnoController.curso}" valueChangeListener="#{alumnoController.obtener}">
+                <f:selectItems value="#{cursoController.getcursospropio()}"/>
+                <f:converter converterId="cursoConverter" />
+            </h:selectOneMenu>
+            <h:commandButton value="Selecciona" action="#{alumnoController.obtener}"/>
+        </h:form>
+
+        <h:form styleClass="jsfcrud_list_form">     
+                <p:dataTable var="item" value="#{alumnoController.lista}" style="margin-bottom:40px; width: 50%;height: 400px; float: left" >
+                    <p:column headerText="nombre" width="100" style="text-align: center" sortBy="#{item.nomAlumno}">
+                        <h:outputText value="#{item.nomAlumno}" />
+                    </p:column>
+                    <p:column headerText="apellido" width="100" style="text-align: center" sortBy="#{item.apeAlumno}">
+                        <h:outputText value="#{item.apeAlumno}" />
+                    </p:column>
+                    
+                    <p:column headerText="Foto" width="100" style="text-align: center"> 
+                        <p:lightBox styleClass="imagebox" id="lighbox1"><!--para ventana modal, ventana encima vinculada con la de debajo-->
+                            <!-- queremos convertir una imagen en un enlace, para ello la marca outputlink, pero el grapicimage tiene que ser tambien de html es decir h no de p primefaces-->
+                            <h:outputLink value="/ColegioDef/faces/javax.faces.resource/#{item.foto}?ln=alumnos" title="#{item.nomAlumno} #{item.apeAlumno}">
+                                <h:graphicImage library="alumnos" name="#{item.foto}" height="45"/>  
+                            </h:outputLink>
+                        </p:lightBox>
+                    </p:column>
+                </p:dataTable>      
+            
+            
+                <p:dataTable var="item" value="#{alumnoController.lista2}" style="margin-bottom:40px; width: 50%; height: 400px; float: left" >
+                        <p:column headerText="Asignatura" width="100" style="text-align: center" sortBy="#{item.asignatura.nomAsignatura}">
+                            <h:outputText value="#{item.asignatura.nomAsignatura}" />
+                        </p:column>
+                    <p:column headerText="Profesores" width="100" style="text-align: center" sortBy="#{item.nifProfesor.nomProfesor}">
+                        <h:outputText value="#{item.nifProfesor.nomProfesor} #{item.nifProfesor.apeProfesor}" />
+                        </p:column>
+                    </p:dataTable>       
+<!--            <p:galleria value="#{alumnoController.lista}" var="image" panelWidth="250" panelHeight="400" showCaption="true" style="float: right; margin-right: 70px">
+                <p:graphicImage library="alumnos" name="#{image.foto}" title="#{image.nomAlumno}"></p:graphicImage>
+            </p:galleria>-->
+        </h:form>        
+         </ui:define>
+    </ui:composition>
+
+</html>

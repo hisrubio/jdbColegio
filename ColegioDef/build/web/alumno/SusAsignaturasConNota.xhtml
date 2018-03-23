@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Alumnos con asignaturas que tienen nota"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+        <h:form>
+            <h:selectOneMenu id="unalumno" value="#{notaController.alumno}" valueChangeListener="#{notaController.obtenerAsignaturaAlumnos}">
+                <f:selectItems value="#{alumnoController.getItemsAvailableSelectOneAlumnos()}"/>
+                <f:converter converterId="AlumnosConverter" />
+            </h:selectOneMenu>
+            <h:commandButton value="Selecciona" action="#{notaController.obtenerAsignaturaAlumnos}"/>
+        </h:form>
+
+        <h:form styleClass="jsfcrud_list_form">     
+            <p:dataTable var="item" value="#{notaController.lista}" style="margin-bottom:40px; width: 70%; float: left" >
+                
+                <p:column headerText="Nombre" sortBy="#{item.asignatura.nomAsignatura}">
+                    <h:outputText value="#{item.asignatura.nomAsignatura}" style="font-weight:bold; color:#01579b; font-size: 18px" />
+                </p:column>
+                <p:column headerText="Nota" sortBy="#{item.calificacion}">
+                    <h:outputText value="#{item.calificacion}" style="font-weight:bold; color:#01579b; font-size: 18px" />
+                </p:column>           
+            </p:dataTable>
+          
+        </h:form>        
+         </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+    </h:head>
+    <h:body>
+        <h:form>                   
+            <p:growl id="messages" showDetail="true" />
+
+            <p:tieredMenu style="width:200px">
+                <p:submenu label="Alumno" icon="ui-icon-person">
+                    <p:menuitem value="Listado" outcome="alumno/List" icon="ui-icon-print" />
+                    <p:menuitem value="SusAsignaturasConNota" outcome="alumno/SusAsignaturasConNota" icon="ui-icon-print" />
+                    <p:menuitem value="Crear" outcome="alumno/Create" icon="ui-icon-print" />
+                </p:submenu>
+
+                <p:separator/>
+
+                <p:submenu label="Asignatura" icon="ui-icon-bookmark">
+                    <p:menuitem value="Listado" outcome="asignatura/List" icon="ui-icon-print" />
+                    <p:menuitem value="SusAlumnos" outcome="asignatura/SusAlumnos" icon="ui-icon-print" />
+                    <p:menuitem value="Crear" outcome="asignatura/Create" icon="ui-icon-print" />
+                </p:submenu>
+
+                <p:separator/>
+
+                <p:submenu label="Curso" icon="ui-icon-star">
+                    <p:menuitem value="Listado" outcome="curso/List" icon="ui-icon-print" />
+                    <p:menuitem value="Sus alumnos" outcome="curso/SusAlumnos" icon="ui-icon-person" />
+                    <p:menuitem value="Crear" outcome="curso/Create" icon="ui-icon-print" />
+                </p:submenu>
+
+                <p:separator/>
+
+                <p:submenu label="profesor" icon="ui-icon-flag">
+                    <p:menuitem value="Listado" outcome="profesor/List" icon="ui-icon-print" />
+                    <p:menuitem value="Crear" outcome="profesor/Create" icon="ui-icon-print" />
+                    <p:menuitem value="sus Asignaturas" outcome="profesor/ProfesorAsignaturas" icon="ui-icon-person" />
+                </p:submenu>
+            </p:tieredMenu>
+        </h:form>        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+<!--        Hello from Facelets
+        <br />
+        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        <br />
+        <h:link outcome="/alumno/List" value="Show All Alumno Items"/>
+        <br />
+        <h:link outcome="/asignatura/List" value="Show All Asignatura Items"/>
+        <br />
+        <h:link outcome="/curso/List" value="Show All Curso Items"/>
+        <br />
+        <h:link outcome="/cursoasignatura/List" value="Show All Cursoasignatura Items"/>
+        <br />
+        <h:link outcome="/nota/List" value="Show All Nota Items"/>
+        <br />
+        <h:link outcome="/profesor/List" value="Show All Profesor Items"/>-->
+    </h:body>
+</html>
+

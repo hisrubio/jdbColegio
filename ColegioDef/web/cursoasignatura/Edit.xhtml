@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCursoasignaturaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCursoasignaturaLabel_aula}" for="aula" />
+                    <h:inputText id="aula" value="#{cursoasignaturaController.selected.aula}" title="#{bundle.EditCursoasignaturaTitle_aula}" required="true" requiredMessage="#{bundle.EditCursoasignaturaRequiredMessage_aula}"/>
+                    <h:outputLabel value="#{bundle.EditCursoasignaturaLabel_curso}" for="curso" />
+                    <h:selectOneMenu id="curso" value="#{cursoasignaturaController.selected.curso}" title="#{bundle.EditCursoasignaturaTitle_curso}" required="true" requiredMessage="#{bundle.EditCursoasignaturaRequiredMessage_curso}">
+                        <f:selectItems value="#{cursoController.getcursospropio()}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCursoasignaturaLabel_asignatura}" for="asignatura" />
+                    <h:selectOneMenu id="asignatura" value="#{cursoasignaturaController.selected.asignatura}" title="#{bundle.EditCursoasignaturaTitle_asignatura}" required="true" requiredMessage="#{bundle.EditCursoasignaturaRequiredMessage_asignatura}">
+                        <f:selectItems value="#{asignaturaController.getAsignaturasPropio()}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCursoasignaturaLabel_nifProfesor}" for="nifProfesor" />
+                    <h:selectOneMenu id="nifProfesor" value="#{cursoasignaturaController.selected.nifProfesor}" title="#{bundle.EditCursoasignaturaTitle_nifProfesor}" required="true" requiredMessage="#{bundle.EditCursoasignaturaRequiredMessage_nifProfesor}">
+                        <f:selectItems value="#{profesorController.getProfesoresPropio()}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{cursoasignaturaController.update}" value="#{bundle.EditCursoasignaturaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCursoasignaturaViewLink}"/>
+                <br />
+                <h:commandLink action="#{cursoasignaturaController.prepareList}" value="#{bundle.EditCursoasignaturaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCursoasignaturaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

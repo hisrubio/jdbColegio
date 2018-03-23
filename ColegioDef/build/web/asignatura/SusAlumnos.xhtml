@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Alumnos de una Asignatura"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+        <h:form>
+            <h:selectOneMenu id="unaasignatura" value="#{notaController.asignatura}" valueChangeListener="#{notaController.obtenerAlumnosAsignatura}">
+                <f:selectItems value="#{asignaturaController.getAsignaturasPropio()}"/>
+                <f:converter converterId="AsignaturasConverter" />
+            </h:selectOneMenu>
+            <h:commandButton value="Selecciona" action="#{notaController.obtenerAlumnosAsignatura}"/>
+        </h:form>
+
+        <h:form styleClass="jsfcrud_list_form">     
+            <p:dataTable var="item" value="#{notaController.lista}" style="margin-bottom:40px; width: 70%; float: left" >
+                
+                <p:column headerText="Nombre y Apellido" sortBy="#{item.alumno.nomAlumno}">
+                    <h:outputText value="#{item.alumno.nomAlumno} #{item.alumno.apeAlumno}" style="font-weight:bold; color:#01579b; font-size: 18px" />
+                </p:column>
+                <p:column headerText="nombre Curso" width="200" style="text-align: center">
+                    <h:outputText value="#{item.alumno.codCurso.codCurso} #{item.alumno.codCurso.nomCurso}" />
+                </p:column>
+                <p:column headerText="Nota" sortBy="#{item.calificacion}">
+                    <h:outputText value="#{item.calificacion}" style="font-weight:bold; color:#01579b; font-size: 18px" />
+                </p:column>
+            </p:dataTable>
+          
+        </h:form>        
+         </ui:define>
+    </ui:composition>
+
+</html>

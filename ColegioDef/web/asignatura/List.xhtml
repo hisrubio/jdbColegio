@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAsignaturaTitle}"></h:outputText>
+        </ui:define>
+        
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                            
+                <p:dataTable var="item" value="#{asignaturaController.items}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="Codigo" width="200" style="text-align: center" sortBy="#{item.codAsignatura}">
+                        <h:outputText value="#{item.codAsignatura}" />
+                    </p:column>
+                    <p:column headerText="nombre" width="200" style="text-align: center" sortBy="#{item.nomAsignatura}">
+                        <h:outputText value="#{item.nomAsignatura}" />
+                    </p:column>
+                    <p:column headerText="horas" width="200" style="text-align: center">
+                        <h:outputText value="#{item.horas}" />
+                    </p:column>
+                    
+                    <p:column headerText="Cursos" width="50" style="text-align: center">
+                        <h:selectManyListbox id="loscursos" style="width: 400px; border: none;background: none; font-size: small;" disabled="true">
+                            <f:selectItems value="#{item.cursoasignaturaList}" var="cursos" itemValue="#{cursos}" itemLabel="#{cursos.curso.codCurso}"/>
+                        </h:selectManyListbox>
+                    </p:column>
+                    
+                    
+                    <p:column headerText="">
+                        <h:commandLink action="#{asignaturaController.prepareView}" value="#{bundle.ListAsignaturaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{asignaturaController.prepareEdit}" value="#{bundle.ListAsignaturaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{asignaturaController.destroy}" value="#{bundle.ListAsignaturaDestroyLink}"/>
+                    </p:column>
+                    </p:dataTable>       
+                                      
+                
+            </h:form>
+            
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

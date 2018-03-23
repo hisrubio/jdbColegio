@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                            
+                <p:dataTable var="item" value="#{cursoController.items}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="codCurso" width="200" style="text-align: center" sortBy="#{item.codCurso}">
+                        <h:outputText value="#{item.codCurso}" />
+                    </p:column>
+                    <p:column headerText="nombre" width="200" style="text-align: center" sortBy="#{item.nomCurso}">
+                        <h:outputText value="#{item.nomCurso}" />
+                    </p:column>
+                    
+                    <p:column headerText="Alumnos" width="100" style="text-align: center">
+                        <h:selectManyListbox id="losalumnos" size="3" style="overflow-y: scroll; width: 400px; border: none;background: none; font-size: small;" disabled="true">
+                            <f:selectItems value="#{item.alumnoList}" var="alumnos" itemValue="#{alumnos}" itemLabel="#{alumnos.nomAlumno}"/>
+                        </h:selectManyListbox>
+                    </p:column>
+                    
+                    <p:column headerText="Asignaturas" width="100" style="text-align: center">
+                        <h:selectManyListbox id="lasasignaturas" size="3" style="overflow-y: scroll; width: 400px; border: none;background: none; font-size: small;" disabled="true">
+                            <f:selectItems value="#{item.cursoasignaturaList}" var="asignaturas" itemValue="#{asignaturas}" itemLabel="#{asignaturas.asignatura.codAsignatura}"/>
+                        </h:selectManyListbox>
+                    </p:column>
+
+                    <p:column headerText="botones">
+                        <h:commandLink action="#{cursoController.prepareView}" value="#{bundle.ListCursoViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{cursoController.prepareEdit}" value="#{bundle.ListCursoEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{cursoController.destroy}" value="#{bundle.ListCursoDestroyLink}"/>
+                    </p:column>
+                    </p:dataTable>       
+                                      
+                
+            </h:form>
+            
+            
+        </ui:define>
+    </ui:composition>
+
+</html>
